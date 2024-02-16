@@ -4,11 +4,14 @@ import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { UserUpdateInput } from './dto/user-update-input.dto';
 import { UserGroup } from './entities/user-group.entity';
+import { Post } from 'src/posts/entities/post.entity';
+import { PostsService } from 'src/posts/posts.service';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User) private usersRepository: Repository<User>,
+    private postsService: PostsService,
     @InjectRepository(UserGroup)
     private userGroupRepository: Repository<UserGroup>,
   ) {}
@@ -67,5 +70,9 @@ export class UsersService {
       where: { user: { id: userId } },
       relations: ['group'],
     });
+  }
+
+  async getUserPosts(userId: number) {
+    return await this.postsService.getUserPosts(userId);
   }
 }

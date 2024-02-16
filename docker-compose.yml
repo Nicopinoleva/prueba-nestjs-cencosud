@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  nest:
+    image: 'nest:latest'
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    build:
+      context: .
+      dockerfile: dockerfile
+    command: sh -c 'yarn install && yarn start:dev'
+    container_name: nest
+    env_file: .env
+    volumes:
+      - '.:/app'
+    ports:
+      - '3000:3000'
+    depends_on:
+      - postgresql
+    networks:
+      prueba-nestjs-cencosud:
+
+  postgresql:
+    image: postgres:latest
+    container_name: postgresql
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    volumes:
+      - db:/var/lib/postgresql/data
+    networks:
+      prueba-nestjs-cencosud:
+
+volumes:
+  db:
+    driver: local
+
+networks:
+  prueba-nestjs-cencosud:
+    name: prueba-nestjs-cencosud

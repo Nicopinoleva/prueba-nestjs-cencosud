@@ -24,28 +24,6 @@ type GroupModel {
   updatedAt: DateTime!
 }
 
-type UserModel {
-  id: Int!
-  firstname: String!
-  lastname: String!
-  email: String!
-  profile: ProfileModel
-  groups: [GroupModel!]!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-type CreateDeleteUpdateModel {
-  success: Boolean!
-  message: String
-}
-
-type UserGroupModel {
-  id: Int!
-  user: UserModel
-  group: GroupModel
-}
-
 type CommentModel {
   id: Int!
   content: String!
@@ -62,6 +40,29 @@ type PostModel {
   content: String!
   createdAt: DateTime!
   updatedAt: DateTime!
+}
+
+type UserModel {
+  id: Int!
+  firstname: String!
+  lastname: String!
+  email: String!
+  profile: ProfileModel
+  groups: [GroupModel!]!
+  posts: [PostModel!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type CreateDeleteUpdateModel {
+  success: Boolean!
+  message: String
+}
+
+type UserGroupModel {
+  id: Int!
+  user: UserModel
+  group: GroupModel
 }
 
 type Query {

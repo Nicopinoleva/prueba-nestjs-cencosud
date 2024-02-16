@@ -1,6 +1,7 @@
 import { Field, ObjectType, Int } from '@nestjs/graphql';
 import { ProfileModel } from './profile.model';
 import { GroupModel } from './group.model';
+import { PostModel } from 'src/posts/models/post.model';
 
 @ObjectType()
 export class UserModel {
@@ -21,6 +22,9 @@ export class UserModel {
 
   @Field(() => [GroupModel], { nullable: true })
   groups?: GroupModel[];
+
+  @Field(() => [PostModel], { nullable: true })
+  posts?: PostModel[];
 
   @Field()
   createdAt: Date;

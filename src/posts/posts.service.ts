@@ -12,4 +12,11 @@ export class PostsService {
   async getAllPosts(): Promise<Post[]> {
     return await this.postsRepository.find({ relations: ['comments', 'user'] });
   }
+
+  async getUserPosts(userId: number) {
+    return await this.postsRepository.find({
+      where: { user: { id: userId } },
+      relations: ['comments'],
+    });
+  }
 }

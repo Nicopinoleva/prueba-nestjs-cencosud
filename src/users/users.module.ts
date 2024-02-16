@@ -12,13 +12,14 @@ import { UserGroupResolver } from './resolvers/user-group.resolver';
 import { GroupResolver } from './resolvers/group.resolver';
 import { GroupService } from './group.service';
 import { UserGroupService } from './user-group.service';
+import { Post } from 'src/posts/entities/post.entity';
+import { PostsModule } from 'src/posts/posts.module';
+import { PostsService } from 'src/posts/posts.service';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User]),
-    TypeOrmModule.forFeature([Profile]),
-    TypeOrmModule.forFeature([UserGroup]),
-    TypeOrmModule.forFeature([Group]),
+    TypeOrmModule.forFeature([User, Profile, UserGroup, Group, Post]),
+    PostsModule,
   ],
   providers: [
     UsersService,
@@ -29,6 +30,7 @@ import { UserGroupService } from './user-group.service';
     UserGroupService,
     GroupResolver,
     GroupService,
+    PostsService,
   ],
 })
 export class UsersModule {}
