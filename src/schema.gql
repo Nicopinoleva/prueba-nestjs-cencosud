@@ -1,0 +1,93 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type ProfileModel {
+  id: Int!
+  biography: String!
+  dateOfBirth: DateTime!
+  user: UserModel!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type GroupModel {
+  id: Int!
+  name: String!
+  description: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type UserModel {
+  id: Int!
+  firstname: String!
+  lastname: String!
+  email: String!
+  profile: ProfileModel
+  groups: [GroupModel!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type CreateDeleteUpdateModel {
+  success: Boolean!
+  message: String
+}
+
+type UserGroupModel {
+  id: Int!
+  user: UserModel
+  group: GroupModel
+}
+
+type CommentModel {
+  id: Int!
+  content: String!
+  post: PostModel!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type PostModel {
+  id: Int!
+  user: UserModel!
+  comments: [CommentModel]!
+  title: String!
+  content: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Query {
+  getAllUsers: [UserModel!]!
+  getAllProfiles: [ProfileModel!]!
+  getAllUserGroups: [UserGroupModel!]!
+  getAllGroups: [GroupModel!]!
+  getAllPosts: [PostModel!]!
+  getAllComments: [CommentModel!]!
+}
+
+type Mutation {
+  createUser(input: UserCreateInput!): CreateDeleteUpdateModel!
+  updateUser(input: UserUpdateInput!): CreateDeleteUpdateModel!
+  deleteUser(id: Float!): CreateDeleteUpdateModel!
+}
+
+input UserCreateInput {
+  firstname: String!
+  lastname: String!
+  email: String!
+}
+
+input UserUpdateInput {
+  id: Int!
+  firstname: String
+  lastname: String
+  email: String
+}
